@@ -1,4 +1,4 @@
-include <lib/bins.scad>
+include <../lib/bins.scad>
 
 render()
   difference() {

@@ -156,6 +156,8 @@ $fn = 200;
 // what is the $fn parameter for rounded rects
 holder_sides_fn = 200;
 
+epsilon = 0.01;
+
 clip_height = 2 * hole_size + 2;
 echo(clip_height=clip_height);
 echo();
@@ -594,18 +596,20 @@ module pegstr() {
   }
 }
 
+// Customizer renders this call only — no override geometry (bin cutouts, tool profiles, etc).
+// To see the full model, uncomment the relevant override below.
 pegstr();
 
-// include <overrides/caliper.scad>
+//include <overrides/caliper.scad>
 // include <overrides/drill-bits.scad>
 // include <overrides/nut-drivers.scad>
 // include <overrides/multimeter.scad>
 // include <overrides/voltmeter.scad>
 // include <overrides/multimeter3.scad>
 // include <overrides/drivers-wiha-flat.scad>
-// include <overrides/bins-small-tall.scad>
-// include <overrides/bins-small-short.scad>
-// include <overrides/bins-pry.scad>
+//include <overrides/bins-small-tall.scad>
+//include <overrides/bins-small-short.scad>
+//include <overrides/bins-pry.scad>
 // include <overrides/bins-eraser-lead.scad>
 // include <overrides/isopropyl-acetone-holder.scad>
 // include <overrides/compass.scad>
@@ -613,5 +617,5 @@ pegstr();
 // include <overrides/bins-pry-short.scad>
 // include <overrides/drill-bits-conical.scad>
 // include <overrides/caliper3.scad>
-// include <overrides/screwdrivers.scad>
+ //include <overrides/screwdrivers.scad>
 // include <overrides/caliper4.scad>
