@@ -53,7 +53,7 @@ holder_offset = 0.0; // [0:0.01:50]
 // base is at the bottom-most peg
 quantized_z_size = false;
 
-// hight of the holder
+// height of the holder
 holder_z_size = 15; // [1:0.001:200]
 
 /* [Shape] */
