@@ -4,13 +4,13 @@
         "stanley-blades": {
             "board_thickness": "0",
             "closed_bottom": "1",
-            "closed_bottom_factor": "0",
-            "closed_bottom_lip": "0",
-            "corner_radius": "2",
+            "closed_bottom_factor": "1",
+            "closed_bottom_lip": "1.7",
+            "corner_radius": "0.44",
             "flatten_bottom": "true",
             "flatten_method": "difference",
             "flatten_top": "false",
-            "holder_angle": "0",
+            "holder_angle": "2.1299999999999955",
             "holder_cutout_side": "0",
             "holder_offset": "0",
             "holder_x_count": "1",
@@ -25,7 +25,7 @@
             "pin_extra_len": "4.9",
             "quantized_x_size": "false",
             "quantized_z_size": "false",
-            "strength_factor": "1",
+            "strength_factor": "0.38905000000000001",
             "taper_ratio_x": "1",
             "taper_ratio_y": "1",
             "wall_thickness": "2"
@@ -156,7 +156,7 @@
             "taper_ratio_x": "1",
             "taper_ratio_y": "1",
             "wall_thickness": "2"
-        },  
+        },
         "stanley-knife-10-189": {
             "$fn": "200",
             "board_thickness": "0",
