@@ -1,7 +1,7 @@
 {
     "fileFormatVersion": "1",
     "parameterSets": {
-        "frost-dial-a-drill-metric-cup": {
+        "frost-dial-a-drill": {
             "board_thickness": "0",
             "closed_bottom": "2",
             "closed_bottom_factor": "1",
