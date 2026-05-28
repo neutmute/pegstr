@@ -46,6 +46,36 @@ Parameters suffixed `_actual` are computed values derived from user inputs.
 
 Overrides in `overrides/*.scad` follow the pattern of loading the base `pegstr.scad` with specific parameters, then adding or subtracting custom geometry (often imported STL models of real tools) to create a precise-fit holder.
 
+**Overrides are not standalone files.** They must be rendered by temporarily editing `pegstr.scad`:
+1. Comment out `pegstr();` (line ~601)
+2. Uncomment (or add) `include <overrides/your-override.scad>`
+3. Run: `"C:\Program Files\OpenSCAD (Nightly)\openscad.exe" pegstr.scad --backend Manifold -p pegstr.json -P your-preset -o output.stl`
+4. Revert `pegstr.scad`
+
+`lib/bins.scad` only defines helper modules (`bin_interior`, `bin_height`) — it does **not** include `pegstr.scad`. Overrides that include `lib/bins.scad` rely on `pegstr.scad` already being in scope (i.e., the override is included from `pegstr.scad`).
+
+### pegstr() Coordinate System
+
+`pegstr()` internally applies `rotate([0,0,-90])` then `translate([tx/2, 0, tz-clip_height/2])` to all geometry. Any geometry placed in a `union()` or `difference()` alongside `pegstr()` must use **world-space coordinates**, computed as:
+
+```
+world X = build Y + tx/2           // horizontal left-right
+world Y = -build X                 // depth (wall → front)
+world Z = build Z + (tz - clip_height/2)
+```
+
+Key world-space interior bounds (for a standard upright holder, `holder_angle=0`, `holder_offset=0`):
+
+| Bound | Formula |
+|---|---|
+| Interior left X | `tx/2 - holder_x_size_actual/2` |
+| Interior right X | `tx/2 + holder_x_size_actual/2` |
+| Interior depth centre Y | `wall_thickness + holder_y_size/2` |
+| Interior floor Z | `tz - holder_z_size_actual + closed_bottom*wall_thickness` |
+| Interior top Z | `tz` |
+
+Using build-space coordinates for `union()`/`difference()` children of `pegstr()` will place geometry far outside the holder.
+
 ## Code Conventions
 
 - `.editorconfig`: LF line endings, 4-space indent for JSON, UTF-8
