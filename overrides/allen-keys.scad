@@ -1,6 +1,6 @@
 hole_wiggle = 0.5;
-render_holder = false;
-render_text = true;
+render_holder = true;
+render_text = false;
 text_size = 7;
 text_depth = 1;
 
@@ -33,7 +33,8 @@ module key_labels() {
       translate([world_x, ty + epsilon, world_z])
         rotate([90, 0, 0])
           linear_extrude(height=text_depth + epsilon)
-            text(str(d), size=text_size, halign="center", valign="center");
+            mirror([1, 0, 0])
+              text(str(d), size=text_size, halign="center", valign="center");
     }
   }
 }
