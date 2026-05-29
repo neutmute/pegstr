@@ -1,6 +1,31 @@
 {
     "fileFormatVersion": "1",
     "parameterSets": {
+        "allen-keys-metric": {
+            "$fn": "200",
+            "board_thickness": "0",
+            "closed_bottom": "0",
+            "corner_radius": "0",
+            "holder_angle": "0",
+            "holder_cutout_side": "0",
+            "holder_offset": "0",
+            "holder_x_count": "4",
+            "holder_x_size": "14",
+            "holder_x_spacing": "0",
+            "holder_y_count": "2",
+            "holder_y_size": "14",
+            "holder_z_size": "104",
+            "hole_size": "5.78",
+            "hole_spacing": "25",
+            "hook_size": "5.25",
+            "pin_extra_len": "3",
+            "quantized_x_size": "false",
+            "quantized_z_size": "false",
+            "strength_factor": "0",
+            "taper_ratio_x": "1",
+            "taper_ratio_y": "1",
+            "wall_thickness": "3"
+        },
         "stanley-blades": {
             "board_thickness": "0",
             "closed_bottom": "1",
