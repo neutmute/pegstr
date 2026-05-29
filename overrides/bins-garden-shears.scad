@@ -22,7 +22,7 @@ module shear_slots() {
 
     // Front slot (row 1): 35mm wide
     translate([tx/2, 2*wall_thickness + 3*holder_y_size/2, tz - slot_z/2])
-        cube([35, holder_y_size + epsilon, slot_z + epsilon], center=true);
+        cube([35 + epsilon, holder_y_size + epsilon, slot_z + epsilon], center=true);
 }
 
 render()
