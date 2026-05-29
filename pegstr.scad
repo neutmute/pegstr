@@ -600,6 +600,10 @@ module pegstr() {
 // To see the full model, uncomment the relevant override below.
 pegstr();
 
+//include <overrides/allen-keys.scad>
+
+// z_legacy overrides
+
 //include <overrides/caliper.scad>
 // include <overrides/drill-bits.scad>
 // include <overrides/nut-drivers.scad>
