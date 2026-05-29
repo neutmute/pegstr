@@ -8,7 +8,7 @@ text_depth = 1;
 // Row 0 = back (closest to wall), Row 1 = front. Col 3 of row 1 is intentionally absent.
 keys = [
   [[2.0, 49], [2.5, 56], [3.0, 60], [4.0, 70]],
-  [[5.0, 80], [6.0, 90], [8.0, 100]],
+  [[5.0, 80], [6.0, 90], [7.0, 95], [8.0, 100]],
 ];
 
 module key_holes() {
