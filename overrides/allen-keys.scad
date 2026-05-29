@@ -1,3 +1,17 @@
+// Metric Allen Key Holder
+//
+// To render, temporarily edit pegstr.scad:
+//   1. Comment out:  pegstr();
+//   2. Uncomment:    include <overrides/allen-keys.scad>
+//
+// Holder STL (render_holder=true, render_text=false):
+//   openscad-nightly pegstr.scad --backend Manifold -p pegstr.json -P allen-keys-metric -o allen-keys-metric-holder.stl
+//
+// Labels STL (render_holder=false, render_text=true):
+//   openscad-nightly pegstr.scad --backend Manifold -p pegstr.json -P allen-keys-metric -o allen-keys-metric-labels.stl
+//
+// Revert pegstr.scad after rendering.
+
 hole_wiggle = 0.5;
 render_holder = true;
 render_text = false;
