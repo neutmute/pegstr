@@ -126,7 +126,39 @@ render()
     }
 ```
 
-- [ ] **Step 2: Visual verification in OpenSCAD**
+- [ ] **Step 2: Render validation (headless)**
+
+Edit `pegstr.scad`: comment out `pegstr();` and add `include <overrides/bins-garden-shears.scad>`.
+
+Then run:
+```bash
+"C:\Program Files\OpenSCAD (Nightly)\openscad.exe" pegstr.scad --backend Manifold -p pegstr.json -P garden-shears --render --summary all --summary-file - -o garden-shears-check.stl 2>&1
+```
+
+Parse the JSON line from the output and assert:
+```python
+python -c "
+import json, sys
+lines = open('nul', 'w').write('') or sys.argv[1]  # pass summary JSON as arg, or parse from output
+# Expected values for garden-shears with holder_z_size=75:
+geo = json.loads('''PASTE_JSON_HERE''')['geometry']
+assert geo['simple'], 'Not manifold'
+assert geo['vertices'] > 500, f'Too few vertices ({geo[\"vertices\"]}) - holder body may be missing'
+z = geo['bounding_box']['size'][2]
+assert 80 < z < 90, f'Z height {z} outside expected range 80-90mm (holder_z_size too small?)'
+print('PASS', geo['bounding_box']['size'])
+"
+```
+
+Expected: `simple: true`, `vertices > 500`, `bounding_box.size[2] ≈ 84.8mm`.
+
+Delete `garden-shears-check.stl` after passing.
+
+- [ ] **Step 3: Revert `pegstr.scad`**
+
+Undo the changes from Step 2 (re-enable `pegstr();`, remove the include line).
+
+- [ ] **Step 4: Visual verification in OpenSCAD**
 
 1. Open `pegstr.scad` in OpenSCAD
 2. Comment out `pegstr();` (around line 601)
@@ -134,13 +166,13 @@ render()
 4. In the Customizer panel, select parameter set `garden-shears`
 5. Press F5 (preview)
 
-Expected result: A rectangular holder with two open slots visible from the top. The rear slot (closest to the back face) is noticeably wider than the front slot.
+Expected result: A rectangular holder with two open slots visible from the top. The rear slot (closest to the back face) is noticeably wider than the front slot. The holder body should be clearly visible (not a flat plate).
 
-- [ ] **Step 3: Revert `pegstr.scad`**
+- [ ] **Step 5: Revert `pegstr.scad`**
 
-Undo the changes from Step 2 (re-enable `pegstr();`, remove the include line).
+Undo the changes from Step 4.
 
-- [ ] **Step 4: Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
 git add overrides/bins-garden-shears.scad

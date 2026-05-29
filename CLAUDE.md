@@ -22,6 +22,65 @@ bash scripts/nut-drivers-wiha-export.sh
 
 **Interactive design:** Open `pegstr.scad` in OpenSCAD GUI, select a parameter set from the Customizer panel.
 
+### Render Validation (headless unit test)
+
+OpenSCAD nightly supports `--summary all --summary-file -` which outputs a JSON geometry report to stdout. Use this as a lightweight sanity check — it runs in ~50–100ms and catches geometry regressions without a GUI.
+
+**Command (for overrides — requires pegstr.scad temporarily edited to include the override):**
+```bash
+"C:\Program Files\OpenSCAD (Nightly)\openscad.exe" pegstr.scad --backend Manifold \
+  -p pegstr.json -P "parameter-set-name" \
+  --render --summary all --summary-file - -o output.stl
+```
+
+**Summary JSON output fields:**
+```json
+{
+  "geometry": {
+    "bounding_box": {
+      "min": [x, y, z],
+      "max": [x, y, z],
+      "size": [width, depth, height]
+    },
+    "dimensions": 3,
+    "facets": 2434,
+    "simple": true,
+    "vertices": 1219
+  }
+}
+```
+
+**Key assertions to make after any geometry change:**
+
+| Check | Command | Catches |
+|---|---|---|
+| No SCAD errors | Exit code == 0 | Syntax errors, broken boolean ops |
+| Manifold geometry | `simple == true` | Non-printable geometry |
+| Non-trivial geometry | `vertices > 500` | Holder body completely removed by cuts |
+| Expected height | `size[2] ≈ tz` | Wrong `holder_z_size` (too small = flatten eats the body) |
+
+**Parse with Python:**
+```bash
+openscad-nightly pegstr.scad ... --summary all --summary-file - -o out.stl 2>&1 \
+  | python -c "
+import json, sys
+lines = sys.stdin.read()
+data = json.loads(lines.split('{', 1)[1].rsplit('}', 1)[0].join(['{', '}']))
+geo = data['geometry']
+assert geo['simple'], 'Not manifold'
+assert geo['vertices'] > 500, f\"Too few vertices: {geo['vertices']}\"
+print('PASS', geo['bounding_box']['size'])
+"
+```
+
+**Known geometry values for reference** (update when parameters change):
+
+| Preset | Expected Z (tz) | Min vertices |
+|---|---|---|
+| `garden-shears` | ~84.8mm | 500 |
+
+> **Key lesson:** `holder_z_size` must be large enough that `tz` leaves sufficient holder body after `flatten_top` clips at `tz`. The visible body height = `tz - (tz - holder_z_size_actual/2)` = `holder_z_size_actual/2`. All existing bin presets use `holder_z_size` ≥ 50mm. With `holder_z_size = 30` and `slot_z = 20`, flatten consumed the entire body.
+
 ## Architecture
 
 ### Core Files
