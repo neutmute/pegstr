@@ -18,11 +18,12 @@ render_text = false;
 text_size = 7;
 text_depth = 1;
 
-// [shaft_diameter_mm, long_arm_length_mm]
+// [shaft_diameter_mm, long_arm_length_mm] or [shaft_diameter_mm, long_arm_length_mm, wiggle_override_mm]
+// wiggle_override overrides hole_wiggle for that key; omit to use the default hole_wiggle
 // Row 0 = back (closest to wall), Row 1 = front. Col 3 of row 1 is intentionally absent.
 keys = [
   [[2.0, 49], [2.5, 56], [3.0, 60], [4.0, 70]],
-  [[5.0, 80], [6.0, 90], [7.0, 95], [8.0, 100]],
+  [[5.0, 80], [6.0, 90], [7.0, 95], [8.0, 100, 0.8]],
 ];
 
 module key_holes() {
@@ -30,10 +31,11 @@ module key_holes() {
     for (col = [0:len(keys[row])-1]) {
       d = keys[row][col][0];
       l = keys[row][col][1];
+      w = len(keys[row][col]) > 2 ? keys[row][col][2] : hole_wiggle;
       world_x = wall_thickness + col * (wall_thickness + holder_x_size_actual) + holder_x_size_actual / 2;
       world_y = wall_thickness + row * (wall_thickness + holder_y_size) + holder_y_size / 2;
       translate([world_x, world_y, tz - l / 2])
-        cylinder(h=l + epsilon, d=d + hole_wiggle, center=true, $fn=$fn);
+        cylinder(h=l + epsilon, d=d + w, center=true, $fn=$fn);
     }
   }
 }
