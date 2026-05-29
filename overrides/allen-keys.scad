@@ -29,7 +29,7 @@ module key_labels() {
     for (col = [0:len(keys[row])-1]) {
       d = keys[row][col][0];
       world_x = wall_thickness + col * (wall_thickness + holder_x_size_actual) + holder_x_size_actual / 2;
-      world_z = tz - holder_z_size_actual + text_size * 2 + row * (text_size + 2);
+      world_z = tz - holder_z_size_actual + text_size * 2 + (len(keys) - 1 - row) * (text_size + 2);
       translate([world_x, ty + epsilon, world_z])
         rotate([90, 0, 0])
           linear_extrude(height=text_depth + epsilon)
