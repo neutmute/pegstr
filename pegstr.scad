@@ -114,10 +114,10 @@ flatten_front_dy = 0; // [-10:0.001:10]
 /* [Pins] */
 
 // pin diameter
-hole_size = 5.95; // [0:0.01:10]
+hole_size = 4.9; // [0:0.01:10]
 
 // smaller hook as they are fragile and only used for insertion, not strength
-hook_size = 5.20; // [0:0.01:10]
+hook_size = 4.9; // [0:0.01:10]
 
 // metric inch
 hole_spacing = 25.0; // [0:0.01:100]
@@ -126,7 +126,7 @@ hole_spacing = 25.0; // [0:0.01:100]
 board_thickness = 0; // [0:0.01:10]
 
 // longer pins for board_thickness 0
-pin_extra_len = 4; // [0:0.01:5]
+pin_extra_len = 4.9; // [0:0.01:5]
 
 /* [Screwdrivers Specific] */
 screwdrivers_scale = 1; // [0.5:0.0001:2]
