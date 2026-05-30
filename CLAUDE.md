@@ -26,12 +26,27 @@ bash scripts/nut-drivers-wiha-export.sh
 
 OpenSCAD nightly supports `--summary all --summary-file -` which outputs a JSON geometry report to stdout. Use this as a lightweight sanity check — it runs in ~50–100ms and catches geometry regressions without a GUI.
 
-**Command (for overrides — requires pegstr.scad temporarily edited to include the override):**
+**Commands (for overrides — requires pegstr.scad temporarily edited to include the override):**
+
+Geometry check (fast, no output file kept):
 ```bash
 "C:\Program Files\OpenSCAD (Nightly)\openscad.exe" pegstr.scad --backend Manifold \
   -p pegstr.json -P "parameter-set-name" \
   --render --summary all --summary-file - -o output.stl
 ```
+
+Visual image output — always write to `demo-images/`:
+```bash
+"C:\Program Files\OpenSCAD (Nightly)\openscad.exe" pegstr.scad --backend Manifold \
+  -p pegstr.json -P "parameter-set-name" \
+  --render --camera=40,27,35,55,0,25,200 -o demo-images/preset-name-top.png
+
+"C:\Program Files\OpenSCAD (Nightly)\openscad.exe" pegstr.scad --backend Manifold \
+  -p pegstr.json -P "parameter-set-name" \
+  --render --camera=40,27,60,0,0,0,200 -o demo-images/preset-name-overhead.png
+```
+
+The two camera presets give a **top-diagonal** view (good for seeing hole geometry) and an **overhead** view (good for confirming through-holes). Adjust the first three `--camera` values to re-centre if the model is off-screen.
 
 **Summary JSON output fields:**
 ```json
@@ -77,7 +92,7 @@ print('PASS', geo['bounding_box']['size'])
 
 | Preset | Expected Z (tz) | Min vertices |
 |---|---|---|
-| `garden-shears` | ~84.8mm | 500 |
+| `garden-shears` | ~34.8mm | 500 |
 
 > **Key lesson:** `holder_z_size` must be large enough that `tz` leaves sufficient holder body after `flatten_top` clips at `tz`. The visible body height = `tz - (tz - holder_z_size_actual/2)` = `holder_z_size_actual/2`. All existing bin presets use `holder_z_size` ≥ 50mm. With `holder_z_size = 30` and `slot_z = 20`, flatten consumed the entire body.
 
