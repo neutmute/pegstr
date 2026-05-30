@@ -29,7 +29,7 @@ module shear_holes() {
 
     // Front hole (row 1): 35mm wide
     translate([tx/2, 2*wall_thickness + 3*holder_y_size/2, tz - plate_z/2])
-        cube([35 + epsilon, holder_y_size + epsilon, plate_z + epsilon], center=true);
+        cube([42 + epsilon, holder_y_size + epsilon, plate_z + epsilon], center=true);
 }
 
 render()
