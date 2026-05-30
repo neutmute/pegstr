@@ -596,12 +596,13 @@ module pegstr() {
   }
 }
 
-// Customizer renders this call only — no override geometry (bin cutouts, tool profiles, etc).
+// Customizer renders this call only â€” no override geometry (bin cutouts, tool profiles, etc).
 // To see the full model, uncomment the relevant override below.
-pegstr();
+//pegstr();
 
 //include <overrides/allen-keys.scad>
 //include <overrides/bins-garden-shears.scad>
+include <overrides/drill-bits-large.scad>
 
 // z_legacy overrides
 
@@ -624,3 +625,5 @@ pegstr();
 // include <overrides/caliper3.scad>
  //include <overrides/screwdrivers.scad>
 // include <overrides/caliper4.scad>
+
+

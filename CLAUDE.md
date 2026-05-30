@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Build & Export
 
-Requires OpenSCAD (nightly recommended). No automated test suite — validation is visual in the OpenSCAD GUI.
+Requires OpenSCAD (nightly recommended). Geometry validation uses the headless `--summary` flag (see Render Validation below) — this is the unit test. Visual validation via the OpenSCAD GUI is optional.
 
 **Render a single design to STL:**
 ```bash
@@ -24,16 +24,36 @@ bash scripts/nut-drivers-wiha-export.sh
 
 ### Render Validation (headless unit test)
 
+**MANDATORY: Run this for every new or modified preset/override before declaring work complete.** Do not report done until all four assertions below pass.
+
 OpenSCAD nightly supports `--summary all --summary-file -` which outputs a JSON geometry report to stdout. Use this as a lightweight sanity check — it runs in ~50–100ms and catches geometry regressions without a GUI.
 
-**Commands (for overrides — requires pegstr.scad temporarily edited to include the override):**
-
-Geometry check (fast, no output file kept):
+**For standard presets** (no override), run directly:
 ```bash
-"C:\Program Files\OpenSCAD (Nightly)\openscad.exe" pegstr.scad --backend Manifold \
+"/c/Program Files/OpenSCAD (Nightly)/openscad.exe" pegstr.scad --backend Manifold \
   -p pegstr.json -P "parameter-set-name" \
-  --render --summary all --summary-file - -o output.stl
+  --render --summary all --summary-file - -o output.stl 2>&1; echo "EXIT:$?"
 ```
+
+**For overrides**, temporarily edit `pegstr.scad` using the Edit tool (exact string match), run the test, then revert with another Edit call:
+
+Step 1 — edit (comment out `pegstr();`, add the include):
+```
+old: pegstr();
+new: //pegstr();
+     include <overrides/your-override.scad>
+```
+
+Step 2 — run the geometry check:
+```bash
+"/c/Program Files/OpenSCAD (Nightly)/openscad.exe" pegstr.scad --backend Manifold \
+  -p pegstr.json -P "parameter-set-name" \
+  --render --summary all --summary-file - -o output.stl 2>&1; echo "EXIT:$?"
+```
+
+Step 3 — revert (undo the edit from step 1). Use the exact same Edit tool call in reverse.
+
+> Use the Edit tool for steps 1 and 3 — not shell sed or PowerShell regex. Exact string matching is reliable; regex patching of SCAD files is fragile.
 
 Visual image output — always write to `demo-images/`:
 ```bash
@@ -74,27 +94,18 @@ The two camera presets give a **top-diagonal** view (good for seeing hole geomet
 | Non-trivial geometry | `vertices > 500` | Holder body completely removed by cuts |
 | Expected height | `size[2] ≈ tz` | Wrong `holder_z_size` (too small = flatten eats the body) |
 
-**Parse with Python:**
-```bash
-openscad-nightly pegstr.scad ... --summary all --summary-file - -o out.stl 2>&1 \
-  | python -c "
-import json, sys
-lines = sys.stdin.read()
-data = json.loads(lines.split('{', 1)[1].rsplit('}', 1)[0].join(['{', '}']))
-geo = data['geometry']
-assert geo['simple'], 'Not manifold'
-assert geo['vertices'] > 500, f\"Too few vertices: {geo['vertices']}\"
-print('PASS', geo['bounding_box']['size'])
-"
-```
+**Reading the output:** The summary JSON is the last `{...}` block in the output (after the `ECHO:` lines). Check the four assertions manually from the raw output — `python3` is not available in this Windows environment.
 
 **Known geometry values for reference** (update when parameters change):
 
 | Preset | Expected Z (tz) | Min vertices |
 |---|---|---|
 | `garden-shears` | ~34.8mm | 500 |
+| `drill-bits-large` | ~58.35mm | 7000 |
 
 > **Key lesson:** `holder_z_size` must be large enough that `tz` leaves sufficient holder body after `flatten_top` clips at `tz`. The visible body height = `tz - (tz - holder_z_size_actual/2)` = `holder_z_size_actual/2`. All existing bin presets use `holder_z_size` ≥ 50mm. With `holder_z_size = 30` and `slot_z = 20`, flatten consumed the entire body.
+
+> **Key lesson (override fill cylinders):** The fill cylinder (h=holder_z_size, centered at `holder_z_size/2 - clip_height/2` in world Z) does NOT align with the top of the cell. There is an **open gap** of `tz - holder_z_size + clip_height/2` ≈ 12mm between the fill top and the cell top (tz). Bits enter this open gap unrestricted before hitting the fill. When cutting a hole of desired depth `l` from the cell top, the fill hole depth must be `l - open_gap`, NOT `l`. Using `l` directly removes all fill within the cell, creating a through-hole regardless of `l`. Formula: `fill_hole_depth = l - (tz - holder_z_size + clip_height / 2)`.
 
 ## Architecture
 
@@ -120,11 +131,10 @@ Parameters suffixed `_actual` are computed values derived from user inputs.
 
 Overrides in `overrides/*.scad` follow the pattern of loading the base `pegstr.scad` with specific parameters, then adding or subtracting custom geometry (often imported STL models of real tools) to create a precise-fit holder.
 
-**Overrides are not standalone files.** They must be rendered by temporarily editing `pegstr.scad`:
-1. Comment out `pegstr();` (line ~601)
-2. Uncomment (or add) `include <overrides/your-override.scad>`
-3. Run: `"C:\Program Files\OpenSCAD (Nightly)\openscad.exe" pegstr.scad --backend Manifold -p pegstr.json -P your-preset -o output.stl`
-4. Revert `pegstr.scad`
+**Overrides are not standalone files.** They must be rendered by temporarily editing `pegstr.scad`. Always use the Edit tool for this — do not use shell regex or PowerShell string replacement, which is fragile:
+1. Edit tool: comment out `pegstr();` (line ~601) and add `include <overrides/your-override.scad>` on the next line
+2. Run the geometry unit test (see Render Validation above) — all four assertions must pass
+3. Edit tool: revert step 1 exactly
 
 `lib/bins.scad` only defines helper modules (`bin_interior`, `bin_height`) — it does **not** include `pegstr.scad`. Overrides that include `lib/bins.scad` rely on `pegstr.scad` already being in scope (i.e., the override is included from `pegstr.scad`).
 
