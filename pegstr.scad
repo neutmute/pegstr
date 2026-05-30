@@ -601,6 +601,7 @@ module pegstr() {
 pegstr();
 
 //include <overrides/allen-keys.scad>
+//include <overrides/bins-garden-shears.scad>
 
 // z_legacy overrides
 
