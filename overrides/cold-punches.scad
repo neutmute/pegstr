@@ -3,9 +3,9 @@ hole_wiggle = 1;
 x_offset = 4;
 y_offset =1;
 
-// punch diameters left to right; hole_wiggle is added at cut time
+// punch diameters right to left; hole_wiggle is added at cut time
 // punches = [8,9,9,9,12,12]        // First set
-punches = [15,11,9];                // Second set
+punches = [11,13,11,15,11,9];                // Second set
 
 difference() {
   union() {
