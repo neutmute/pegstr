@@ -1,0 +1,178 @@
+<h2>Design: Closed-Frame Sliding Button Cover</h2>
+<p class="subtitle">Dimensions and cross-sections — let me know if anything needs adjusting</p>
+
+<div class="section">
+  <h3>Cross-section view (looking along the slide direction)</h3>
+  <div class="mockup">
+    <div class="mockup-header">Side profile — frame on panel, button centred</div>
+    <div class="mockup-body" style="padding:20px; background:#111;">
+      <svg viewBox="0 0 340 260" width="100%" style="display:block; font-family:monospace;">
+
+        <!-- Panel surface -->
+        <rect x="0" y="195" width="340" height="60" fill="#2a2a3e"/>
+        <text x="170" y="248" text-anchor="middle" fill="#555" font-size="10">dishwasher panel (metal)</text>
+
+        <!-- Button protrusion -->
+        <circle cx="170" cy="189" r="6" fill="#e74c3c" opacity="0.9"/>
+        <text x="170" y="192" text-anchor="middle" fill="white" font-size="7">btn</text>
+        <!-- Button protrusion bar -->
+        <rect x="164" y="191" width="12" height="4" fill="#e74c3c" opacity="0.6"/>
+
+        <!-- Frame top bar (9mm tall) -->
+        <rect x="60" y="130" width="220" height="9" fill="#4a9eff" rx="1" opacity="0.85"/>
+        <!-- Magnet in top bar -->
+        <ellipse cx="120" cy="134.5" rx="4" ry="2.5" fill="#e74c3c" opacity="0.9"/>
+        <ellipse cx="220" cy="134.5" rx="4" ry="2.5" fill="#e74c3c" opacity="0.9"/>
+        <text x="120" y="128" text-anchor="middle" fill="#e74c3c" font-size="8">N magnet</text>
+
+        <!-- Frame bottom bar (9mm tall) -->
+        <rect x="60" y="182" width="220" height="9" fill="#4a9eff" rx="1" opacity="0.85"/>
+        <!-- Magnet in bottom bar -->
+        <ellipse cx="120" cy="186.5" rx="4" ry="2.5" fill="#e74c3c" opacity="0.9"/>
+        <ellipse cx="220" cy="186.5" rx="4" ry="2.5" fill="#e74c3c" opacity="0.9"/>
+
+        <!-- Frame interior label -->
+        <text x="280" y="162" fill="#aaa" font-size="9">interior</text>
+        <text x="280" y="173" fill="#aaa" font-size="9">14mm</text>
+
+        <!-- Cover (sliding) -->
+        <rect x="80" y="139" width="100" height="43" fill="#ff9f43" rx="1" opacity="0.85"/>
+        <text x="130" y="158" text-anchor="middle" fill="white" font-size="9" font-weight="bold">COVER</text>
+        <!-- Cover cavity -->
+        <rect x="105" y="182" width="50" height="3" fill="#222" rx="0.5" opacity="0.7"/>
+        <text x="130" y="176" text-anchor="middle" fill="#ffd" font-size="7">3mm cavity</text>
+
+        <!-- Dimension: top bar -->
+        <line x1="30" y1="130" x2="30" y2="139" stroke="#4a9eff" stroke-width="1"/>
+        <line x1="26" y1="130" x2="34" y2="130" stroke="#4a9eff" stroke-width="1"/>
+        <line x1="26" y1="139" x2="34" y2="139" stroke="#4a9eff" stroke-width="1"/>
+        <text x="22" y="135" text-anchor="end" fill="#4a9eff" font-size="9">9mm bar</text>
+
+        <!-- Dimension: interior -->
+        <line x1="30" y1="139" x2="30" y2="182" stroke="#aaa" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="26" y1="139" x2="34" y2="139" stroke="#aaa" stroke-width="1"/>
+        <line x1="26" y1="182" x2="34" y2="182" stroke="#aaa" stroke-width="1"/>
+        <text x="22" y="165" text-anchor="end" fill="#aaa" font-size="9">14mm</text>
+
+        <!-- Dimension: bottom bar -->
+        <line x1="30" y1="182" x2="30" y2="191" stroke="#4a9eff" stroke-width="1"/>
+        <line x1="26" y1="182" x2="34" y2="182" stroke="#4a9eff" stroke-width="1"/>
+        <line x1="26" y1="191" x2="34" y2="191" stroke="#4a9eff" stroke-width="1"/>
+        <text x="22" y="189" text-anchor="end" fill="#4a9eff" font-size="9">9mm bar</text>
+
+        <!-- Total height dimension -->
+        <line x1="10" y1="130" x2="10" y2="191" stroke="#2ecc71" stroke-width="1.5"/>
+        <line x1="6" y1="130" x2="14" y2="130" stroke="#2ecc71" stroke-width="1.5"/>
+        <line x1="6" y1="191" x2="14" y2="191" stroke="#2ecc71" stroke-width="1.5"/>
+        <text x="6" y="162" text-anchor="end" fill="#2ecc71" font-size="10" font-weight="bold">32mm</text>
+
+        <!-- clearance markers -->
+        <line x1="305" y1="130" x2="305" y2="121" stroke="#fd79a8" stroke-width="1" stroke-dasharray="2,2"/>
+        <text x="308" y="118" fill="#fd79a8" font-size="8">←10mm above</text>
+        <text x="308" y="128" fill="#fd79a8" font-size="8">  button edge</text>
+
+        <line x1="305" y1="191" x2="305" y2="202" stroke="#fd79a8" stroke-width="1" stroke-dasharray="2,2"/>
+        <text x="308" y="210" fill="#fd79a8" font-size="8">←10mm below</text>
+        <text x="308" y="220" fill="#fd79a8" font-size="8">  (11mm limit ✓)</text>
+
+        <!-- Button edge markers -->
+        <line x1="60" y1="121" x2="280" y2="121" stroke="#e74c3c" stroke-width="0.5" stroke-dasharray="3,2" opacity="0.5"/>
+        <text x="62" y="119" fill="#e74c3c" font-size="8">button top edge</text>
+        <line x1="60" y1="201" x2="280" y2="201" stroke="#e74c3c" stroke-width="0.5" stroke-dasharray="3,2" opacity="0.5"/>
+        <text x="62" y="209" fill="#e74c3c" font-size="8">button bottom edge</text>
+
+        <!-- Depth dimension (5mm) -->
+        <text x="170" y="108" text-anchor="middle" fill="#a29bfe" font-size="10">← 5mm depth from panel →</text>
+
+      </svg>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Top view (looking down at panel)</h3>
+  <div class="mockup">
+    <div class="mockup-header">Frame footprint — cover shown in covered position (button hidden)</div>
+    <div class="mockup-body" style="padding:20px; background:#111;">
+      <svg viewBox="0 0 380 160" width="100%" style="display:block; font-family:monospace;">
+
+        <!-- Frame outline -->
+        <rect x="30" y="30" width="300" height="100" fill="none" stroke="#4a9eff" stroke-width="2" rx="2"/>
+        <!-- Top bar fill -->
+        <rect x="30" y="30" width="300" height="9" fill="#4a9eff" opacity="0.5" rx="2"/>
+        <!-- Bottom bar fill -->
+        <rect x="30" y="121" width="300" height="9" fill="#4a9eff" opacity="0.5"/>
+        <!-- Left wall -->
+        <rect x="30" y="30" width="2" height="100" fill="#4a9eff" opacity="0.7"/>
+        <!-- Right wall (stopper) -->
+        <rect x="328" y="30" width="2" height="100" fill="#2ecc71" opacity="0.9"/>
+        <text x="333" y="82" fill="#2ecc71" font-size="8" transform="rotate(90,333,82)">STOPPER</text>
+
+        <!-- Cover (in rightmost / covered position) -->
+        <rect x="202" y="39" width="126" height="82" fill="#ff9f43" opacity="0.8" rx="1"/>
+        <text x="265" y="82" text-anchor="middle" fill="white" font-size="9" font-weight="bold">COVER</text>
+        <text x="265" y="95" text-anchor="middle" fill="#ffd" font-size="8">(covered pos.)</text>
+
+        <!-- Button (hidden under cover) -->
+        <circle cx="265" cy="80" r="6" fill="#e74c3c" opacity="0.3" stroke="#e74c3c" stroke-width="1" stroke-dasharray="2,2"/>
+        <text x="265" y="83" text-anchor="middle" fill="#e74c3c" font-size="7">btn</text>
+
+        <!-- Magnet positions in top bar -->
+        <ellipse cx="70" cy="34.5" rx="4" ry="3" fill="#e74c3c" opacity="0.9"/>
+        <ellipse cx="200" cy="34.5" rx="4" ry="3" fill="#e74c3c" opacity="0.9"/>
+        <ellipse cx="70" cy="125.5" rx="4" ry="3" fill="#e74c3c" opacity="0.9"/>
+        <ellipse cx="200" cy="125.5" rx="4" ry="3" fill="#e74c3c" opacity="0.9"/>
+        <text x="135" y="20" text-anchor="middle" fill="#e74c3c" font-size="8">× 4 magnets (8mm×2mm)</text>
+
+        <!-- Dimension: total width 42mm label -->
+        <line x1="30" y1="148" x2="330" y2="148" stroke="#2ecc71" stroke-width="1"/>
+        <line x1="30" y1="144" x2="30" y2="152" stroke="#2ecc71" stroke-width="1"/>
+        <line x1="330" y1="144" x2="330" y2="152" stroke="#2ecc71" stroke-width="1"/>
+        <text x="180" y="158" text-anchor="middle" fill="#2ecc71" font-size="10" font-weight="bold">42mm total width</text>
+
+        <!-- Cover width 18mm -->
+        <line x1="202" y1="110" x2="328" y2="110" stroke="#ff9f43" stroke-width="1"/>
+        <line x1="202" y1="107" x2="202" y2="113" stroke="#ff9f43" stroke-width="1"/>
+        <line x1="328" y1="107" x2="328" y2="113" stroke="#ff9f43" stroke-width="1"/>
+        <text x="265" y="120" text-anchor="middle" fill="#ff9f43" font-size="8">cover 18mm wide</text>
+
+        <!-- Travel distance -->
+        <line x1="32" y1="85" x2="200" y2="85" stroke="#a29bfe" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="32" y1="82" x2="32" y2="88" stroke="#a29bfe" stroke-width="1"/>
+        <line x1="200" y1="82" x2="200" y2="88" stroke="#a29bfe" stroke-width="1"/>
+        <text x="116" y="98" text-anchor="middle" fill="#a29bfe" font-size="8">~20mm travel</text>
+
+        <!-- Right annotation -->
+        <line x1="259" y1="30" x2="259" y2="10" stroke="#fd79a8" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <text x="265" y="8" fill="#fd79a8" font-size="8">btn centre</text>
+
+      </svg>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Parts summary</h3>
+  <table style="width:100%; border-collapse:collapse; font-size:13px;">
+    <tr style="border-bottom:1px solid #333;">
+      <th style="text-align:left; padding:6px; color:#4a9eff;">Part</th>
+      <th style="text-align:left; padding:6px; color:#4a9eff;">Dimensions</th>
+      <th style="text-align:left; padding:6px; color:#4a9eff;">Notes</th>
+    </tr>
+    <tr style="border-bottom:1px solid #222;">
+      <td style="padding:6px; color:#fff;">Frame</td>
+      <td style="padding:6px; color:#aaa;">42 × 32 × 5 mm</td>
+      <td style="padding:6px; color:#aaa;">Single print. Pause for 4 magnets in bar pockets (8mm×2mm). Right wall = stopper.</td>
+    </tr>
+    <tr style="border-bottom:1px solid #222;">
+      <td style="padding:6px; color:#fff;">Cover</td>
+      <td style="padding:6px; color:#aaa;">18 × 13.4 × 4.5 mm</td>
+      <td style="padding:6px; color:#aaa;">Slides in frame interior. 3mm deep cavity on panel-facing side clears button protrusion. No magnets needed.</td>
+    </tr>
+  </table>
+  <p style="font-size:12px; color:#888; margin-top:10px;">
+    Clearances: 0.3mm slide tolerance cover-to-frame. Magnet pockets 0.1mm oversize for press-fit. Left end open — cover can be removed if needed.
+  </p>
+</div>
+
+<p class="subtitle">Does this look right? Any dimensions to change before I write the spec?</p>

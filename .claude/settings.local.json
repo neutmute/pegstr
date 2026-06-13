@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bash *)",
+      "Bash(\"/c/Program Files/OpenSCAD \\(Nightly\\)/openscad.exe\" \"C:/CodeMine/pegstr/dishwasher-button-cover.scad\" --backend Manifold -D 'render_part=\"frame\"' --render --summary all --summary-file - -o /tmp/dbc-frame.stl)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(\"/c/Program Files/OpenSCAD \\(Nightly\\)/openscad.exe\" \"C:/CodeMine/pegstr/dishwasher-button-cover.scad\" --backend Manifold -D 'render_part=\"frame\"' --summary all --summary-file -)",
+      "Bash(\"/c/Program Files/OpenSCAD \\(Nightly\\)/openscad.exe\" \"C:/CodeMine/pegstr/dishwasher-button-cover.scad\" --backend Manifold -D 'render_part=\"frame\"' --render --summary all --summary-file -)"
+    ]
+  }
+}
