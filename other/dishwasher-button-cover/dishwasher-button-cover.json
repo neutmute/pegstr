@@ -1,0 +1,22 @@
+{
+    "fileFormatVersion": "1",
+    "parameterSets": {
+        "miele-cover": {
+            "$fn": "64",
+            "cover_t": "2",
+            "inner_r": "8",
+            "magnet_d": "7",
+            "magnet_depth": "2.8999999999999999",
+            "magnet_fit": "0.20000000000000001",
+            "magnet_floor": "2",
+            "magnet_spacing": "80",
+            "opening_angle": "105",
+            "outer_r": "17",
+            "ring_h": "5",
+            "tdc_clock": "3",
+            "tdc_d": "2",
+            "tdc_depth": "1",
+            "tdc_inset": "3"
+        }
+    }
+}
