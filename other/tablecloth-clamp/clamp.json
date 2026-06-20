@@ -1,0 +1,15 @@
+{
+    "fileFormatVersion": "1",
+    "parameterSets": {
+        "OutdoorTable": {
+            "add_stress_relief": "true",
+            "clamp_height": "61",
+            "clamp_thickness": "2",
+            "clamp_width": "20",
+            "lower_arm_length": "25",
+            "top_arm_length": "30",
+            "with_s_curve": "true",
+            "with_texture": "true"
+        }
+    }
+}
